@@ -2,3 +2,5 @@
 *.elc
 /elpa
 /custom.el
+/auto-save-list
+/configuration.el

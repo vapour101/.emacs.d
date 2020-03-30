@@ -1,3 +1,7 @@
 * .emacs.d
 
-My Emacs configuration
+My Emacs configuration, mostly built from snippets +stolen from+ /inspired by/ other people's configs.
+
+* Sources
+
+[[https://github.com/hrs/dotfiles/tree/master/emacs/.emacs.d][hrs’s dotfiles]]

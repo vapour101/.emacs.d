@@ -1,0 +1,29 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: vapour101
+#+OPTIONS: num:nil
+
+* Configure =use-package=
+
+This makes sure that =use-package= will install any missing packages.
+
+#+begin_src emacs-lisp
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t)
+#+end_src
+
+Always compile packages, and use the newest version available.
+
+#+begin_src emacs-lisp
+  (use-package auto-compile
+    :config (auto-compile-on-load-mode))
+
+  (setq load-prefer-newer t)
+#+end_src
+
+* Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]]
+
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/sensible-defaults.el")
+  (sensible-defaults/use-all-settings)
+  (sensible-defaults/use-all-keybindings)
+#+end_src

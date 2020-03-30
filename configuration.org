@@ -136,3 +136,37 @@ Emacs.verticalScrollBars: off
     ("M-n" . move-text-down)
     ("M-p" . move-text-up))
 #+END_SRC
+
+* Project Management
+
+** =ripgrep=
+
+Use =deadgrep= as an interface to =ripgrep=. (Make sure you actually have =ripgrep= installed.)
+
+#+BEGIN_SRC emacs-lisp
+  (use-package deadgrep)
+#+END_SRC
+
+** =company= Everywhere
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company)
+  (add-hook 'after-init-hook 'global-company-mode)
+#+END_SRC
+
+** =projectile=
+
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :bind
+    ("C-c v" . deadgrep)
+    :config
+    (setq projectile-switch-project-action 'projectile-dired)
+    (setq projectile-require-project-root nil))
+#+END_SRC
+
+** =undo-tree=
+
+#+BEGIN_SRC emacs-lisp
+  (use-package undo-tree)
+#+END_SRC

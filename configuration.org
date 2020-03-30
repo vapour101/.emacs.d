@@ -27,6 +27,7 @@ Always compile packages, and use the newest version available.
   (sensible-defaults/use-all-settings)
   (sensible-defaults/use-all-keybindings)
 #+END_SRC
+
 * Utility Functions
 
 #+BEGIN_SRC emacs-lisp
@@ -123,4 +124,15 @@ Emacs.verticalScrollBars: off
     :config
     (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
     (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
+#+END_SRC
+
+* General Editting
+
+** =move-text=
+
+#+BEGIN_SRC emacs-lisp
+  (use-package move-text
+    :bind
+    ("M-n" . move-text-down)
+    ("M-p" . move-text-up))
 #+END_SRC

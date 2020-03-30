@@ -5,3 +5,4 @@ My Emacs configuration, mostly built from snippets +stolen from+ /inspired by/ o
 * Sources
 
 [[https://github.com/hrs/dotfiles/tree/master/emacs/.emacs.d][hrs’s dotfiles]]
+[[https://github.com/dakra/dmacs][dakra's dmacs]]

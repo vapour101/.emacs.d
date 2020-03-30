@@ -6,24 +6,121 @@
 
 This makes sure that =use-package= will install any missing packages.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
-#+end_src
+#+END_SRC
 
 Always compile packages, and use the newest version available.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package auto-compile
     :config (auto-compile-on-load-mode))
 
   (setq load-prefer-newer t)
-#+end_src
+#+END_SRC
 
 * Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]]
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (load-file "~/.emacs.d/sensible-defaults.el")
   (sensible-defaults/use-all-settings)
   (sensible-defaults/use-all-keybindings)
-#+end_src
+#+END_SRC
+* Utility Functions
+
+#+BEGIN_SRC emacs-lisp
+  (defun hrs/notify-send (title message)
+    "Display a desktop notification by shelling out to `notify-send'."
+    (call-process-shell-command
+      (format "notify-send -t 2000 \"%s\" \"%s\"" title message)))
+#+END_SRC
+
+* UI Preferences
+
+** Window Chrome
+
+Kill the scroll bars and menus.
+
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode 0)
+  (menu-bar-mode 0)
+  (scroll-bar-mode -1)
+  (set-window-scroll-bars (minibuffer-window) nil nil)
+#+END_SRC
+
+Bind the frame title to the current project name.
+
+#+BEGIN_SRC emacs-lisp
+  (setq frame-title-format '((:eval (projectile-project-name))))
+#+END_SRC
+
+** Load theme
+
+This in block should be put in =~/.Xresources= and loaded from =~/.xprofile=
+with ~xrdb .Xresources~ so Emacs loads the right font
+even before loading this config and the background doesn't flicker.
+
+#+BEGIN_SRC conf :tangle no
+! Emacs settings so they are set even before Emacs starts
+! See: https://www.gnu.org/software/emacs/manual/html_node/emacs/Table-of-Resources.html#Table-of-Resources
+Emacs.font: Operator Mono-7:weight=medium:width=normal
+! Emacs.font: Operator Mono:size=7:slant=normal:weight=normal:width=normal
+Emacs.reverseVideo: on
+Emacs.menuBar: 0
+Emacs.toolBar: 0
+Emacs.verticalScrollBars: off
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package moe-theme
+    :unless noninteractive
+    :config (load-theme 'moe-light t))
+#+END_SRC
+
+** =moody= Modeline
+
+#+BEGIN_SRC emacs-lisp
+  (use-package moody
+    :config
+    (setq x-underline-at-descent-line t)
+    (moody-replace-mode-line-buffer-identification)
+    (moody-replace-vc-mode))
+#+END_SRC
+
+** Hide minor modes with =minions=
+
+#+BEGIN_SRC emacs-lisp
+  (use-package minions
+    :config
+    (setq minions-mode-line-lighter ""
+          minions-mode-line-delimiters '("" . ""))
+    (minions-mode 1))
+#+END_SRC
+
+** Disable visual bell
+
+#+BEGIN_SRC emacs-lisp
+  (setq ring-bell-function 'ignore)
+#+END_SRC
+
+** Scroll consertively
+
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-conservatively 100)
+#+END_SRC
+
+** Highlight the current line
+
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode)
+#+END_SRC
+
+** Highlight uncommitted changes
+
+#+BEGIN_SRC emacs-lisp
+  (use-package diff-hl
+    :config
+    (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+    (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
+#+END_SRC

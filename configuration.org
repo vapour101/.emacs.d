@@ -257,6 +257,14 @@ Use syntax highlighting when source blocks.
 	(global-set-key (kbd "C-h k") #'helpful-key))
 #+end_SRC
 
+** Save my location within a file
+
+When I reopen a file, return the point to its last location.
+
+#+begin_src emacs-lisp
+  (save-place-mode t)
+#+end_src
+
 * Programming Environments
 
 Properly indent to 4 spaces by default and use spaces instead of tabs.

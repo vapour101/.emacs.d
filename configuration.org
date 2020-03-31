@@ -163,6 +163,16 @@ Use =deadgrep= as an interface to =ripgrep=. (Make sure you actually have
   (use-package deadgrep)
 #+end_src
 
+** =magit=
+
+#+begin_src emacs-lisp
+  (use-package magit
+    :bind
+    ("C-x g" . magit-status)
+    :config
+    (setq git-commit-summary-max-length 50))
+#+end_src
+
 ** =company= Everywhere
 
 #+begin_src emacs-lisp

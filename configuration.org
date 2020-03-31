@@ -165,8 +165,8 @@ Use =deadgrep= as an interface to =ripgrep=. (Make sure you actually have
 ** =company= Everywhere
 
 #+begin_src emacs-lisp
-  (use-package company)
-  (add-hook 'after-init-hook 'global-company-mode)
+  (use-package company
+	:hook (after-init . global-company-mode))
 #+end_src
 
 ** =projectile=
@@ -177,9 +177,8 @@ Use =deadgrep= as an interface to =ripgrep=. (Make sure you actually have
 	("C-c v" . deadgrep)
 	:config
 	(setq projectile-switch-project-action 'projectile-dired)
-	(setq projectile-require-project-root nil))
-
-  (projectile-global-mode)
+	(setq projectile-require-project-root nil)
+	(projectile-global-mode))
 #+end_src
 
 ** =undo-tree=
@@ -225,8 +224,7 @@ Use pretty bullets
 
 #+begin_src emacs-lisp
   (use-package org-bullets
-    :init
-    (add-hook 'org-mode-hook 'org-bullets-mode))
+    :hook (org-mode . org-bullets-mode))
 #+end_src
 
 Use a downward-pointing arrow instead of ellipsis for collapsed headers.
@@ -252,11 +250,11 @@ Use syntax highlighting when source blocks.
 ** Set up =helpful=
 
 #+begin_SRC emacs-lisp
-  (use-package helpful)
-
-  (global-set-key (kbd "C-h f") #'helpful-callable)
-  (global-set-key (kbd "C-h v") #'helpful-variable)
-  (global-set-key (kbd "C-h k") #'helpful-key)
+  (use-package helpful
+	:config
+	(global-set-key (kbd "C-h f") #'helpful-callable)
+	(global-set-key (kbd "C-h v") #'helpful-variable)
+	(global-set-key (kbd "C-h k") #'helpful-key))
 #+end_SRC
 
 * Programming Environments
@@ -285,15 +283,14 @@ Automatically scroll the =*compilation*= buffer.
 Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
 
 #+begin_src emacs-lisp
-  (use-package paredit)
-  (use-package rainbow-delimiters)
+  (use-package paredit
+	:hook (emacs-lisp-mode . paredit-mode))
 
-  (add-hook 'emacs-lisp-mode-hook (lambda ()
-				    (setq show-paren-style 'expression)
-				    (paredit-mode)
-				    (rainbow-delimiters-mode)))
+  (use-package rainbow-delimiters
+	:hook (emacs-lisp-mode . rainbow-delimiters-mode))
 
   (use-package eldoc
-    :config
-    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
+	:hook (emacs-lisp-mode . eldoc-mode))
+
+  (add-hook 'emacs-lisp-mode-hook (lambda () (setq show-paren-style 'expression)))
 #+end_src

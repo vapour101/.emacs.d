@@ -259,10 +259,11 @@ Use syntax highlighting when source blocks.
 
 * Programming Environments
 
-Properly indent to 4 spaces by default.
+Properly indent to 4 spaces by default and use spaces instead of tabs.
 
 #+begin_src emacs-lisp
   (setq-default tab-width 4)
+  (setq-default indent-tabs-mode nil)
 #+end_src
 
 Treat camelCase terms as separate words everywhere.

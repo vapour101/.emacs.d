@@ -1,6 +1,6 @@
-#+TITLE: Emacs Configuration
-#+AUTHOR: vapour101
-#+OPTIONS: num:nil
+#+title: Emacs Configuration
+#+author: vapour101
+#+options: num:nil
 
 * Configure =use-package=
 

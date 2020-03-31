@@ -304,3 +304,11 @@ Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
 
   (add-hook 'emacs-lisp-mode-hook (lambda () (setq show-paren-style 'expression)))
 #+end_src
+
+** Git
+
+#+begin_src emacs-lisp
+  (use-package gitattributes-mode)
+  (use-package gitconfig-mode)
+  (use-package gitignore-mode)
+#+end_src

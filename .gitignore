@@ -1,7 +1,11 @@
 *~
 *.elc
-/elpa
-/custom.el
+
 /auto-save-list
 /configuration.el
+/custom.el
+/elpa
 /projectile-bookmarks.eld
+/transient
+
+places

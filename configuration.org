@@ -182,13 +182,18 @@ Use =deadgrep= as an interface to =ripgrep=. (Make sure you actually have
 
 #+begin_src emacs-lisp
   (use-package projectile
-	:bind
-	("C-c v" . deadgrep)
-	:config
-	(setq projectile-switch-project-action 'projectile-dired)
-	(setq projectile-require-project-root nil)
-	(projectile-global-mode))
+    :bind
+    ("C-c v" . deadgrep)
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :config
+    (setq projectile-switch-project-action 'projectile-dired)
+    (setq projectile-require-project-root nil)
+    (projectile-global-mode))
 #+end_src
+
+#+RESULTS:
+: deadgrep
 
 ** =undo-tree=
 

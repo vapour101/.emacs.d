@@ -73,8 +73,6 @@ config and the background doesn't flicker.
 #+begin_src conf :tangle no
 ! Emacs settings so they are set even before Emacs starts
 ! See: https://www.gnu.org/software/emacs/manual/html_node/emacs/Table-of-Resources.html#Table-of-Resources
-Emacs.font: Operator Mono-7:weight=medium:width=normal
-Emacs.reverseVideo: on
 Emacs.menuBar: 0
 Emacs.toolBar: 0
 Emacs.verticalScrollBars: off

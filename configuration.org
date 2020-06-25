@@ -150,6 +150,24 @@ Emacs.verticalScrollBars: off
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
 #+end_src
 
+** Flycheck
+
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :init
+    (global-flycheck-mode t))
+#+end_src
+
+** Yasnippet
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :init
+    (yas-global-mode 1))
+
+  (use-package yasnippet-snippets)
+#+end_src
+
 * Project Management
 
 ** =ripgrep=

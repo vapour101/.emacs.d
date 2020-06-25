@@ -255,6 +255,26 @@ Use syntax highlighting when source blocks.
 
 * General Settings
 
+** Ivy, Swiper and Counsel
+
+#+begin_src emacs-lisp
+  (use-package ivy
+    :config
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq enable-recursive-minibuffers t)
+    :bind (("C-c C-r" . ivy-resume)
+           ("<f6>" . ivy-resume)))
+  (use-package swiper
+    :bind ("C-s" . swiper))
+  (use-package counsel
+    :bind (("M-x" . counsel-M-x)
+           ("C-x C-f" . counsel-find-file)
+           :map minibuffer-local-map
+           ("C-r" . counsel-minibuffer-history)))
+#+end_src
+
+
 ** Always kill current buffer
 
 #+begin_src emacs-lisp

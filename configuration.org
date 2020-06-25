@@ -370,3 +370,20 @@ Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
   (use-package gitconfig-mode)
   (use-package gitignore-mode)
 #+end_src
+
+** Javascript
+
+** Rust
+
+#+begin_src emacs-lisp
+  (use-package rust-mode
+    :mode "\\.rs\\'"
+    :config
+    (use-package flycheck-rust
+      :after flycheck
+      :commands flycheck-rust-setup
+      :init (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+    (use-package cargo
+      :commands cargo-minor-mode
+      :init (add-hook 'rust-mode-hook #'cargo-minor-mode)))
+#+end_src

@@ -273,6 +273,13 @@ Use syntax highlighting when source blocks.
 
 * General Settings
 
+** Bind find file in other window
+
+#+begin_src emacs-lisp
+  (use-package ido
+    :bind ("C-x C-M-f" . ido-find-file-other-window))
+#+end_src
+
 ** Ivy, Swiper and Counsel
 
 #+begin_src emacs-lisp

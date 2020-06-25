@@ -1,11 +1,17 @@
+# General Files
 *~
 *.elc
+/session.*
 
-/auto-save-list
+# Specific Files
 /configuration.el
 /custom.el
-/elpa
+/ido.last
 /projectile-bookmarks.eld
-/transient
+/places
+/recentf
 
-places
+# Folders
+/auto-save-list
+/elpa
+/transient

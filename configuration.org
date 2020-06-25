@@ -168,6 +168,11 @@ Emacs.verticalScrollBars: off
   (use-package yasnippet-snippets)
 #+end_src
 
+** =lsp-mode=
+#+begin_src emacs-lisp
+  (use-package lsp-mode)
+#+end_src
+
 * Project Management
 
 ** =ripgrep=
@@ -299,7 +304,6 @@ Use syntax highlighting when source blocks.
            ("C-r" . counsel-minibuffer-history)))
 #+end_src
 
-
 ** Always kill current buffer
 
 #+begin_src emacs-lisp
@@ -376,14 +380,5 @@ Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
 ** Rust
 
 #+begin_src emacs-lisp
-  (use-package rust-mode
-    :mode "\\.rs\\'"
-    :config
-    (use-package flycheck-rust
-      :after flycheck
-      :commands flycheck-rust-setup
-      :init (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-    (use-package cargo
-      :commands cargo-minor-mode
-      :init (add-hook 'rust-mode-hook #'cargo-minor-mode)))
+  (use-package rustic)
 #+end_src

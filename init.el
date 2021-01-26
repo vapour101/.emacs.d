@@ -5,9 +5,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (csharp-mode rjsx-mode moe-theme bison-mode gitignore-mode gitconfig-mode gitattributes-mode rainbow-delimiters paredit lsp-mode helpful org-bullets org-plus-contrib undo-tree company magit deadgrep move-text diff-hl minions moody rustic yasnippet-snippets yasnippet flycheck counsel swiper ivy auto-compile use-package)))
- '(safe-local-variable-values (quote ((create-lockfiles)))))
+   '(moe-theme projectile haskell-mode arduino-mode csharp-mode rjsx-mode bison-mode gitignore-mode gitconfig-mode gitattributes-mode rainbow-delimiters paredit lsp-mode helpful org-bullets org-plus-contrib undo-tree company magit deadgrep move-text diff-hl minions moody rustic yasnippet-snippets yasnippet flycheck counsel swiper ivy auto-compile use-package))
+ '(safe-local-variable-values '((create-lockfiles))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

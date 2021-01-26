@@ -83,7 +83,7 @@ Emacs.verticalScrollBars: off
 	  :unless noninteractive
 	  :config
 	  (moe-light)
-	  (moe-theme-set-color 'green))
+	  (moe-theme-apply-color 'green))
 #+end_src
 
 ** =moody= Modeline
@@ -133,7 +133,8 @@ Emacs.verticalScrollBars: off
     (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
 #+end_src
 
-* General Editting
+* General
+Editting
 
 ** =move-text=
 
@@ -172,6 +173,13 @@ Emacs.verticalScrollBars: off
 #+begin_src emacs-lisp
   (use-package lsp-mode)
 #+end_src
+
+** Killring
+
+#+begin_src emacs-lisp
+  (setq save-interprogram-paste-before-kill t)
+#+end_src
+
 
 * Project Management
 
@@ -328,6 +336,18 @@ When I reopen a file, return the point to its last location.
   (save-place-mode t)
 #+end_src
 
+** =windmove=
+
+#+begin_src emacs-lisp
+  (use-package windmove
+    :config
+    (setq windmove-wrap-around t)
+    :bind (("M-P" . windmove-up)
+           ("M-N" . windmove-down)
+           ("M-F" . windmove-right)
+           ("M-B" . windmove-left)))
+#+end_src
+
 * Programming Environments
 
 Properly indent to 4 spaces by default and use spaces instead of tabs.
@@ -395,8 +415,21 @@ Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
   (use-package rjsx-mode)
 #+end_src
 
+** Arduino
+
+#+begin_src emacs-lisp
+  (use-package arduino-mode
+    :mode "\\.ino\\'")
+#+end_src
+
 ** Flex
 
 #+begin_src emacs-lisp
   (use-package bison-mode)
+#+end_src
+
+** Haskell
+
+#+begin_src emacs-lisp
+  (use-package haskell-mode)
 #+end_src

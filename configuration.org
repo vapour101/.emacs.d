@@ -155,6 +155,7 @@ Editting
 
 #+begin_src emacs-lisp
   (use-package flycheck
+    :ensure
     :init
     (global-flycheck-mode t))
 #+end_src
@@ -163,15 +164,45 @@ Editting
 
 #+begin_src emacs-lisp
   (use-package yasnippet
+    :ensure
     :init
-    (yas-global-mode 1))
+    (yas-global-mode 1)
+    :config
+    (yas-reload-all)
+    (add-hook 'prog-mode-hook 'yas-minor-mode)
+    (add-hook 'text-mode-hook 'yas-minor-mode))
 
   (use-package yasnippet-snippets)
 #+end_src
 
 ** =lsp-mode=
 #+begin_src emacs-lisp
-  (use-package lsp-mode)
+  (use-package lsp-mode
+    :ensure
+    :commands lsp
+    :custom
+    ;; what to use when checking on-save. "check" is default, I prefer clippy
+    (lsp-rust-analyzer-cargo-watch-command "clippy")
+    (lsp-eldoc-render-all t)
+    (lsp-idle-delay 0.6)
+    ;; enable / disable the hints as you prefer:
+    (lsp-rust-analyzer-server-display-inlay-hints t)
+    (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
+    (lsp-rust-analyzer-display-chaining-hints t)
+    (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
+    (lsp-rust-analyzer-display-closure-return-type-hints t)
+    (lsp-rust-analyzer-display-parameter-hints nil)
+    (lsp-rust-analyzer-display-reborrow-hints nil)
+    :config
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
+  (use-package lsp-ui
+    :ensure
+    :commands lsp-ui-mode
+    :custom
+    (lsp-ui-peek-always-show t)
+    (lsp-ui-sideline-show-hover t)
+    (lsp-ui-doc-enable nil))
 #+end_src
 
 ** Killring
@@ -206,7 +237,46 @@ Use =deadgrep= as an interface to =ripgrep=. (Make sure you actually have
 
 #+begin_src emacs-lisp
   (use-package company
-	:hook (after-init . global-company-mode))
+    :ensure
+    :hook (after-init . global-company-mode)
+    :custom
+    (company-idle-delay 0.5)
+    :bind
+    (:map company-active-map
+            ("C-n". company-select-next)
+            ("C-p". company-select-previous)
+            ("M-<". company-select-first)
+            ("M->". company-select-last))
+    (:map company-mode-map
+      ("<tab>". tab-indent-or-complete)
+      ("TAB". tab-indent-or-complete)))
+
+  (defun company-yasnippet-or-completion ()
+    (interactive)
+    (or (do-yas-expand)
+        (company-complete-common)))
+
+  (defun check-expansion ()
+    (save-excursion
+      (if (looking-at "\\_>") t
+        (backward-char 1)
+        (if (looking-at "\\.") t
+          (backward-char 1)
+          (if (looking-at "::") t nil)))))
+
+  (defun do-yas-expand ()
+    (let ((yas/fallback-behavior 'return-nil))
+      (yas/expand)))
+
+  (defun tab-indent-or-complete ()
+    (interactive)
+    (if (minibufferp)
+        (minibuffer-complete)
+      (if (or (not yas/minor-mode)
+              (null (do-yas-expand)))
+          (if (check-expansion)
+              (company-complete-common)
+            (indent-for-tab-command)))))
 #+end_src
 
 ** =projectile=
@@ -370,6 +440,15 @@ Automatically scroll the =*compilation*= buffer.
   (setq compilation-scroll-output t)
 #+end_src
 
+** CMake
+
+#+begin_src emacs-lisp
+  (use-package cmake-mode)
+#+end_src
+
+(use-package cmake-ide
+:config (cmake-ide-setup))
+
 ** Elisp
 
 Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
@@ -406,7 +485,24 @@ Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
 ** Rust
 
 #+begin_src emacs-lisp
-  (use-package rustic)
+  (use-package rustic
+    :ensure
+    :bind (:map rustic-mode-map
+                ("M-j" . lsp-ui-imenu)
+                ("M-?" . lsp-find-references)
+                ("C-c C-c l" . flycheck-list-errors)
+                ("C-c C-c a" . lsp-execute-code-action)
+                ("C-c C-c r" . lsp-rename)
+                ("C-c C-c q" . lsp-workspace-restart)
+                ("C-c C-c Q" . lsp-workspace-shutdown)
+                ("C-c C-c s" . lsp-rust-analyzer-status))
+    :config
+    (setq rustic-format-on-save t)
+    (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
+
+  (defun rk/rustic-mode-hook ()
+    (when buffer-file-name
+      (setq-local buffer-save-without-query t)))
 #+end_src
 
 ** React

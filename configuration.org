@@ -86,6 +86,13 @@ Emacs.verticalScrollBars: off
 	  (moe-theme-apply-color 'green))
 #+end_src
 
+** FiraCode
+
+#+begin_src emacs-lisp
+  (add-to-list 'default-frame-alist '(font . "Fira Code"))
+  (set-face-attribute 'default t :font "Fira Code" :height 100)
+#+end_src
+
 ** =moody= Modeline
 
 #+begin_src emacs-lisp
@@ -134,6 +141,24 @@ Emacs.verticalScrollBars: off
 #+end_src
 
 * General
+
+Font Ligatures
+
+#+begin_src emacs-lisp
+  (ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
+                     ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
+                     "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
+                     "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+                     "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
+                     "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
+                     "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
+                     "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
+                     "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
+                     "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
+
+  (global-ligature-mode 't)
+#+end_src
+
 Editting
 
 ** =move-text=

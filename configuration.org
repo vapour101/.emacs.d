@@ -550,6 +550,13 @@ Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
     :mode "\\.ino\\'")
 #+end_src
 
+** GDScript
+
+#+begin_src emacs-lisp
+  (use-package gdscript-mode
+    :hook ((gdscript-mode . lsp)))
+#+end_src
+
 ** Flex
 
 #+begin_src emacs-lisp

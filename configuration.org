@@ -325,9 +325,6 @@ Use =deadgrep= as an interface to =ripgrep=. (Make sure you actually have
     (projectile-global-mode))
 #+end_src
 
-#+RESULTS:
-: deadgrep
-
 ** =undo-tree=
 
 #+begin_src emacs-lisp

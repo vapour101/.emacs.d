@@ -142,6 +142,13 @@ Emacs.verticalScrollBars: off
 
 * General
 
+Emacs Server
+So we can use =emacsclient= to open files in emacs from the OS.
+
+#+begin_src emacs-lisp
+  (server-start)
+#+end_src
+
 Font Ligatures
 
 #+begin_src emacs-lisp

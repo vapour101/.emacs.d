@@ -497,7 +497,7 @@ Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
                 ("C-c C-c Q" . lsp-workspace-shutdown)
                 ("C-c C-c s" . lsp-rust-analyzer-status))
     :config
-    (setq rustic-format-on-save t)
+    (setq rustic-format-on-save nil)
     (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
 
   (defun rk/rustic-mode-hook ()

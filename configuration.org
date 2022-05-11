@@ -554,3 +554,57 @@ Use =paredit= to balance parentheses and =rainbow-delimiters= to color them.
 #+begin_src emacs-lisp
   (use-package haskell-mode)
 #+end_src
+
+** Pug
+
+#+begin_src emacs-lisp
+  (use-package pug-mode)
+#+end_src
+
+** Python
+
+#+begin_src emacs-lisp
+  (use-package renpy)
+#+end_src
+
+** PHP
+
+#+begin_src emacs-lisp
+  (use-package php-mode)
+#+end_src
+
+** Web Templates
+
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :mode "\\.njk\\'")
+
+  (use-package emmet-mode
+    :hook (web-mode css-mode)
+    :bind (:map emmet-mode-keymap
+           ("<backtab>" . emmet-expand-line)
+           ("\C-c TAB" . emmet-expand-line)
+           ("C-M-p" . emmet-prev-edit-point)
+           ("C-M-n" . emmet-next-edit-point))
+    :config
+    (setq emmet-move-cursor-between-quotes t)
+    (setq emmet-move-cursor-after-expanding t))
+
+  (use-package rainbow-mode
+    :hook (css-mode scss-mode sass-mode))
+
+  (use-package scss-mode
+    :defer t
+    :config
+    ;;(setq css-indent-offset 2)
+    ;; turn off annoying auto-compile on save
+    (setq scss-compile-at-save nil))
+
+  ;; Imenu support for css/scss/less
+  (use-package counsel-css
+    :disabled t
+    :hook (css-mode . counsel-css-imenu-setup))
+
+  (use-package sass-mode
+    :mode ("\\.sass\\'"))
+#+end_src
